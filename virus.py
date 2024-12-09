@@ -1,18 +1,36 @@
 class Virus(object):
-    # Properties and attributes of the virus used in Simulation.
+    """Represents a virus with properties and attributes used in the simulation."""
+    
     def __init__(self, name, repro_rate, mortality_rate):
-        # Define the attributes of your virus
-        self.name = name  # Name of the virus (e.g., "HIV", "Sniffles")
-        self.repro_rate = repro_rate  # Reproduction rate (basic reproduction number)
-        self.mortality_rate = mortality_rate  # Mortality rate of the virus
+        self.name = name
+        self.repro_rate = repro_rate
+        self.mortality_rate = mortality_rate
 
-# Test this class
+    def __str__(self):
+        """Provides a string representation of the virus for easier logging and debugging."""
+        return f"{self.name} (Reproduction Rate: {self.repro_rate}, Mortality Rate: {self.mortality_rate})"
+
+# Example Usage
 if __name__ == "__main__":
-    # Test your virus class by making an instance and confirming 
-    # it has the attributes you defined
-    virus = Virus("HIV", 0.8, 0.3)
-    assert virus.name == "HIV"
-    assert virus.repro_rate == 0.8
-    assert virus.mortality_rate == 0.3
+    # Create virus instances
+    ebola_virus = Virus("Ebola", 1.9, 0.6)
+    chickenpox_virus = Virus("Chickenpox", 0.8, 0.1)
+    hiv_virus = Virus("HIV", 0.8, 0.3)
 
-    print("Virus test passed!")
+    # Test virus attributes
+    assert hiv_virus.name == "HIV"
+    assert hiv_virus.repro_rate == 0.8
+    assert hiv_virus.mortality_rate == 0.3
+
+    assert chickenpox_virus.name == "Chickenpox"
+    assert chickenpox_virus.repro_rate == 0.8
+    assert chickenpox_virus.mortality_rate == 0.1
+
+    assert ebola_virus.name == "Ebola"
+    assert ebola_virus.repro_rate == 1.9
+    assert ebola_virus.mortality_rate == 0.6
+
+    # Print virus details
+    print(ebola_virus)
+    print(chickenpox_virus)
+    print(hiv_virus)
