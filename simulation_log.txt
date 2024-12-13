@@ -1,0 +1,401 @@
+Timestamp: 2024-12-12 20:19:27.176981
+Population Size: 1000
+Initial Infected: 10
+Virus: CommonCold
+Mortality Rate: 0.1
+Reproduction Rate: 0.6
+
+Step 1: Interactions = 1000, New Infections = 481
+
+Step 1: Total Population = 1000, Fatalities = 30
+Living: 1000, Dead: 0, Vaccinated: 190
+
+Final Summary:
+Survivors: 970
+Deaths: 30
+Total Vaccinated: 523
+Total Interactions: 1000
+Simulation completed.
+
+--- New Simulation ---
+Population Size: 100000
+Vaccination Percentage: 0.9
+Virus Name: Ebola
+Mortality Rate: 0.25
+Reproductive Rate: 0.7
+
+Time Step 1:
+  Alive: 99995
+  Deaths: 5
+
+Time Step 2:
+  Alive: 99964
+  Deaths: 36
+
+Time Step 3:
+  Alive: 99686
+  Deaths: 314
+
+Time Step 4:
+  Alive: 97936
+  Deaths: 2064
+
+Time Step 5:
+  Alive: 95977
+  Deaths: 4023
+
+Time Step 6:
+  Alive: 94480
+  Deaths: 5520
+
+Time Step 7:
+  Alive: 93348
+  Deaths: 6652
+
+Time Step 8:
+  Alive: 92519
+  Deaths: 7481
+
+Time Step 9:
+  Alive: 91861
+  Deaths: 8139
+
+Time Step 10:
+  Alive: 91382
+  Deaths: 8618
+
+Time Step 11:
+  Alive: 91016
+  Deaths: 8984
+
+Time Step 12:
+  Alive: 90783
+  Deaths: 9217
+
+Time Step 13:
+  Alive: 90571
+  Deaths: 9429
+
+Time Step 14:
+  Alive: 90415
+  Deaths: 9585
+
+Time Step 15:
+  Alive: 90290
+  Deaths: 9710
+
+Time Step 16:
+  Alive: 90204
+  Deaths: 9796
+
+Time Step 17:
+  Alive: 90123
+  Deaths: 9877
+
+Time Step 18:
+  Alive: 90084
+  Deaths: 9916
+
+Time Step 19:
+  Alive: 90054
+  Deaths: 9946
+
+Time Step 20:
+  Alive: 90023
+  Deaths: 9977
+
+Time Step 21:
+  Alive: 90005
+  Deaths: 9995
+
+Time Step 22:
+  Alive: 89992
+  Deaths: 10008
+
+Time Step 23:
+  Alive: 89982
+  Deaths: 10018
+
+Time Step 24:
+  Alive: 89966
+  Deaths: 10034
+
+Time Step 25:
+  Alive: 89956
+  Deaths: 10044
+
+Time Step 26:
+  Alive: 89953
+  Deaths: 10047
+
+Time Step 27:
+  Alive: 89952
+  Deaths: 10048
+
+Time Step 28:
+  Alive: 89947
+  Deaths: 10053
+
+Time Step 29:
+  Alive: 89945
+  Deaths: 10055
+
+Time Step 30:
+  Alive: 89943
+  Deaths: 10057
+
+Time Step 31:
+  Alive: 89943
+  Deaths: 10057
+
+Time Step 32:
+  Alive: 89942
+  Deaths: 10058
+
+Time Step 33:
+  Alive: 89941
+  Deaths: 10059
+
+Time Step 34:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 35:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 36:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 37:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 38:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 39:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 40:
+  Alive: 89940
+  Deaths: 10060
+
+Time Step 41:
+  Alive: 89939
+  Deaths: 10061
+
+--- Final Summary ---
+Time Steps: 41
+Population Size: 100000
+Survivors: 89939
+Deaths: 10061
+Vaccinated Survivors: 89939
+
+--- Total Infections ---
+Total Infected: 21926
+
+--- New Simulation ---
+Population Size: 100000
+Vaccination Percentage: 0.9
+Virus Name: Ebola
+Mortality Rate: 0.25
+Reproductive Rate: 0.7
+
+Time Step 1:
+  Alive: 99997
+  Deaths: 3
+
+Time Step 2:
+  Alive: 99969
+  Deaths: 31
+
+Time Step 3:
+  Alive: 99678
+  Deaths: 322
+
+Time Step 4:
+  Alive: 97983
+  Deaths: 2017
+
+Time Step 5:
+  Alive: 95993
+  Deaths: 4007
+
+Time Step 6:
+  Alive: 94545
+  Deaths: 5455
+
+Time Step 7:
+  Alive: 93445
+  Deaths: 6555
+
+Time Step 8:
+  Alive: 92563
+  Deaths: 7437
+
+Time Step 9:
+  Alive: 91943
+  Deaths: 8057
+
+Time Step 10:
+  Alive: 91445
+  Deaths: 8555
+
+Time Step 11:
+  Alive: 91042
+  Deaths: 8958
+
+Time Step 12:
+  Alive: 90781
+  Deaths: 9219
+
+Time Step 13:
+  Alive: 90595
+  Deaths: 9405
+
+Time Step 14:
+  Alive: 90445
+  Deaths: 9555
+
+Time Step 15:
+  Alive: 90343
+  Deaths: 9657
+
+Time Step 16:
+  Alive: 90266
+  Deaths: 9734
+
+Time Step 17:
+  Alive: 90198
+  Deaths: 9802
+
+Time Step 18:
+  Alive: 90154
+  Deaths: 9846
+
+Time Step 19:
+  Alive: 90114
+  Deaths: 9886
+
+Time Step 20:
+  Alive: 90085
+  Deaths: 9915
+
+Time Step 21:
+  Alive: 90068
+  Deaths: 9932
+
+Time Step 22:
+  Alive: 90052
+  Deaths: 9948
+
+Time Step 23:
+  Alive: 90036
+  Deaths: 9964
+
+Time Step 24:
+  Alive: 90027
+  Deaths: 9973
+
+Time Step 25:
+  Alive: 90020
+  Deaths: 9980
+
+Time Step 26:
+  Alive: 90018
+  Deaths: 9982
+
+Time Step 27:
+  Alive: 90016
+  Deaths: 9984
+
+Time Step 28:
+  Alive: 90010
+  Deaths: 9990
+
+Time Step 29:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 30:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 31:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 32:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 33:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 34:
+  Alive: 90009
+  Deaths: 9991
+
+Time Step 35:
+  Alive: 90007
+  Deaths: 9993
+
+Time Step 36:
+  Alive: 90007
+  Deaths: 9993
+
+Time Step 37:
+  Alive: 90007
+  Deaths: 9993
+
+Time Step 38:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 39:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 40:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 41:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 42:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 43:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 44:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 45:
+  Alive: 90006
+  Deaths: 9994
+
+Time Step 46:
+  Alive: 90005
+  Deaths: 9995
+
+--- Final Summary ---
+Time Steps: 46
+Population Size: 100000
+Survivors: 90005
+Deaths: 9995
+Vaccinated Survivors: 90005
+
+--- Total Infections ---
+Total Infected: 21404
+
