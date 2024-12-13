@@ -1,97 +1,144 @@
-import random
-from person import Individual
-from logger import SimulationLogger
+import random, sys
+# random.seed(42)
+from person import Person
+from logger import Logger
 from virus import Virus
 
-class PandemicSimulation:
-    """Handles the entire pandemic simulation process."""
 
-    def __init__(self, population_size, vaccination_rate, virus, initial_infected=1):
-        """Initializes the simulation parameters and creates the population."""
-        self.logger = SimulationLogger('simulation_log.txt')
+class Simulation(object):
+    def __init__(self, virus, pop_size, vacc_percentage, initial_infected=1,):
+        '''
+        Initialize the simulation 
+        '''
+        print("Initializing simulation...")
+        self.logger = Logger("simulation_log.txt")
         self.virus = virus
-        self.population_size = population_size
-        self.vaccination_rate = vaccination_rate
+        self.pop_size = pop_size
+        self.vacc_percentage = vacc_percentage
         self.initial_infected = initial_infected
+        self.infected_count = initial_infected
         self.population = self._create_population()
-        self.new_infections = []
-        self.total_interactions = 0
+        self.newly_infected = []
+        
 
-        self.logger.log_metadata(population_size, vaccination_rate, virus.name, virus.mortality_rate, virus.repro_rate, initial_infected)
+        print(f"Simulation Initialized. Infected count: {self.infected_count}")
+
+        self.logger.write_metadata(
+            pop_size, vacc_percentage, virus.name, virus.mortality_rate, virus.repro_rate
+        )
 
     def _create_population(self):
-        """Generates the population with a mix of vaccinated, infected, and healthy individuals."""
+        '''
+        creates the initial pop
+        '''
         population = []
-        for i in range(self.population_size):
+        for i in range(self.pop_size):
             if i < self.initial_infected:
-                person = Individual(i, False, self.virus)
-                population.append(person)
-            elif i < self.population_size * self.vaccination_rate:
-                person = Individual(i, True)
-                population.append(person)
+                population.append(Person(i, is_vaccinated=False, infection=self.virus))
+                self.infected_count += 1
             else:
-                person = Individual(i, False)
-                population.append(person)
+                is_vaccinated = random.random() < self.vacc_percentage
+                population.append(Person(i, is_vaccinated=is_vaccinated))
         return population
 
-    def _should_continue(self):
-        """Checks if the simulation should continue based on the number of infected, alive people."""
-        infected_alive = sum(1 for p in self.population if p.alive and p.infection)
-        non_vaccinated_alive = sum(1 for p in self.population if p.alive and not p.vaccinated)
-        return infected_alive > 0 and non_vaccinated_alive > 0
+    def _simulation_should_continue(self):
+        '''
+        Determines if the simulation should continue.
+        '''
+        alive_people = [person for person in self.population if person.is_alive]
+        if not alive_people or all(person.is_vaccinated for person in alive_people):
+            return False
+        return True
 
-    def start(self):
-        """Starts the simulation and runs it until it finishes."""
-        step = 0
-        while self._should_continue():
-            step += 1
-            self.run_step(step)
-
-        living_count = sum(1 for p in self.population if p.alive)
-        dead_count = len(self.population) - living_count
-        vaccinated_count = sum(1 for p in self.population if p.vaccinated)
-        self.logger.log_summary(living_count, dead_count, vaccinated_count, self.total_interactions)
-
-    def run_step(self, step):
-        """Simulates a single step (time unit) in the pandemic simulation."""
-        interactions = 0
-        fatalities = 0
-        total_alive = len([p for p in self.population if p.alive])
-        total_dead = len([p for p in self.population if not p.alive])
-        vaccinated_count = sum(1 for p in self.population if p.vaccinated)
-
+    def time_step(self):
+        '''
+        simulates a single time step, including interactions and infection updates
+        '''
         for person in self.population:
-            if person.infection:
-                for _ in range(100):
-                    other_person = random.choice(self.population)
-                    interactions += 1
-                    self.handle_interaction(person, other_person)
+            if person.is_alive and person.infection:
+                interactions = 0
+                while interactions < 100:
+                    random_person = random.choice(self.population)
+                    if random_person.is_alive and random_person != person:
+                        self.interaction(person, random_person)
+                        interactions += 1
 
-        new_infections = len(self.new_infections)
-        self._apply_new_infections()
-        self.logger.record_interactions(step, interactions, new_infections)
+                person.check_for_death()
 
-        for person in self.population:
-            if person.infection and person.alive:
-                if not person.survive_or_die():
-                    fatalities += 1
+        self._infect_newly_infected()
 
-        self.logger.record_survival_stats(step, len(self.population), fatalities, total_alive, total_dead, vaccinated_count)
-        self.total_interactions += interactions
+    def run(self):
+        '''
+        Runs Simulation
+        '''
+        print("Starting Simulation...")
+        time_step_counter = 0
+        while self._simulation_should_continue():
+            time_step_counter += 1
+            self.time_step()
 
-    def handle_interaction(self, infected, other_person):
-        """Handles a single interaction between an infected person and a random individual."""
-        if other_person.alive and not other_person.vaccinated and not other_person.infection:
-            if random.random() < self.virus.repro_rate:
-                self.new_infections.append(other_person)
+            # log final results
+            alive = len([p for p in self.population if p.is_alive])
+            dead = self.pop_size - alive
+            self.logger.log_infection_survival(time_step_counter, alive, dead)
 
-    def _apply_new_infections(self):
-        """Infects all newly infected individuals."""
-        for person in self.new_infections:
+        survivors = len([p for p in self.population if p.is_alive])
+        vaccinated = sum([1 for p in self.population if p.is_alive and p.is_vaccinated])
+        deaths = self.pop_size - survivors
+        self.logger.log_final_summary(time_step_counter, self.pop_size, survivors, deaths, vaccinated)
+
+        self.logger.log_total_infections(self.infected_count)
+
+        clear_log = input("Would you like to clear the log file after this simulation? (y/n): ")
+        if clear_log.lower() == 'y':
+            with open(self.logger.file_name, 'w') as file:
+                file.write("")  # Clear contents
+            print(f"Log file '{self.logger.file_name}' has been cleared.")
+        else:
+            print("Log file was not cleared.")
+
+
+    def interaction(self, infected_person, random_person):
+        '''
+        handles an interaction between an infected person and another person
+        '''
+        if random_person.is_vaccinated or random_person.infection:
+            return
+        
+        if random.random() < self.virus.repro_rate:
+            self.newly_infected.append(random_person)
+            self.infected_count += 1
+
+        if random_person not in self.newly_infected:
+            self.newly_infected.append(random_person)
+
+
+    def _infect_newly_infected(self):
+        '''
+        infects all people in the 'newly_infected' list
+        '''
+        for person in self.newly_infected:
             person.infection = self.virus
-        self.new_infections.clear()
+        self.newly_infected = []
+
 
 if __name__ == "__main__":
-    virus_instance = Virus("CommonCold", 0.6, 0.1)
-    sim = PandemicSimulation(1000, 0.2, virus_instance, initial_infected=10)
-    sim.start()
+    # Check if the correct number of arguments is provided
+    if len(sys.argv) != 7:
+        print("Usage: python3 simulation.py <population_size> <vaccination_percentage> <virus_name> <repro_rate> <mortality_rate> <initial_infected>")
+        sys.exit(1)
+
+    # Parse command-line arguments
+    pop_size = int(sys.argv[1])
+    vacc_percentage = float(sys.argv[2])
+    virus_name = sys.argv[3]
+    repro_num = float(sys.argv[4])
+    mortality_rate = float(sys.argv[5])
+    initial_infected = int(sys.argv[6])
+
+    # Create the Virus object
+    virus = Virus(virus_name, repro_num, mortality_rate)
+
+    # Initializethe Simulation
+    sim = Simulation(virus, pop_size, vacc_percentage, initial_infected)
+    sim.run()
