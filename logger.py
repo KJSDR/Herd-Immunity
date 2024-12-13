@@ -1,52 +1,51 @@
 class Logger:
     def __init__(self, file_name):
-        '''
-        Initialize the logger with a file name.
-        '''
+        """
+        Initializes the logger with the specified file name.
+        """
         self.file_name = file_name
 
-    def write_metadata(self, pop_size, vacc_percentage, virus_name, mortality_rate, repro_rate):
-        '''
-        Log the metadata of the simulation.
-        '''
+    def write_metadata(self, population_size, vaccination_rate, virus_name, death_rate, reproduction_rate):
+        """
+        Logs the simulation metadata.
+        """
         with open(self.file_name, 'a') as file:
             file.write(f"--- New Simulation ---\n")
-            file.write(f"Population Size: {pop_size}\n")
-            file.write(f"Vaccination Percentage: {vacc_percentage}\n")
-            file.write(f"Virus Name: {virus_name}\n")
-            file.write(f"Mortality Rate: {mortality_rate}\n")
-            file.write(f"Reproductive Rate: {repro_rate}\n")
+            file.write(f"Population Size: {population_size}\n")
+            file.write(f"Vaccination Rate: {vaccination_rate}\n")
+            file.write(f"Virus: {virus_name}\n")
+            file.write(f"Mortality Rate: {death_rate}\n")
+            file.write(f"Reproductive Rate: {reproduction_rate}\n")
             file.write("\n")
 
-    def log_infection_survival(self, time_step, alive, deaths):
-        '''
-        Log the infection survival data after a time step.
-        '''
+    def log_infection_status(self, timestep, alive_count, death_count):
+        """
+        Logs the infection survival stats at each timestep.
+        """
         with open(self.file_name, 'a') as file:
-            file.write(f"Time Step {time_step}:\n")
-            file.write(f"  Alive: {alive}\n")
-            file.write(f"  Deaths: {deaths}\n")
+            file.write(f"Time Step {timestep}:\n")
+            file.write(f"  Alive: {alive_count}\n")
+            file.write(f"  Deaths: {death_count}\n")
             file.write("\n")
 
-
-    def log_final_summary(self, time_steps, pop_size, survivors, deaths, vaccinated):
-        '''
-        Log the final summary.
-        '''
+    def log_summary(self, total_steps, population_size, survivors, fatalities, vaccinated_survivors):
+        """
+        Logs the final summary at the end of the simulation.
+        """
         with open(self.file_name, 'a') as file:
             file.write("--- Final Summary ---\n")
-            file.write(f"Time Steps: {time_steps}\n")
-            file.write(f"Population Size: {pop_size}\n")
+            file.write(f"Time Steps: {total_steps}\n")
+            file.write(f"Population Size: {population_size}\n")
             file.write(f"Survivors: {survivors}\n")
-            file.write(f"Deaths: {deaths}\n")
-            file.write(f"Vaccinated Survivors: {vaccinated}\n")
+            file.write(f"Fatalities: {fatalities}\n")
+            file.write(f"Vaccinated Survivors: {vaccinated_survivors}\n")
             file.write("\n")
 
-    def log_total_infections(self, total_infected):
-            '''
-            Log the total number of infections
-            '''
-            with open(self.file_name, 'a') as file:
-                file.write(f"--- Total Infections ---\n")
-                file.write(f"Total Infected: {total_infected}\n")
-                file.write("\n")
+    def log_total_infected(self, total_infected):
+        """
+        Logs the total infections recorded.
+        """
+        with open(self.file_name, 'a') as file:
+            file.write(f"--- Total Infections ---\n")
+            file.write(f"Total Infected: {total_infected}\n")
+            file.write("\n")
